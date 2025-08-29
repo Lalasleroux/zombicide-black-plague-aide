@@ -58,6 +58,17 @@
     .btn{appearance:none; border:1px solid var(--ring); background:var(--card); color:var(--text); padding:10px 14px; border-radius:12px; cursor:pointer}
     .btn:hover{border-color:var(--accent)}
     .note{font-size:13px; color:var(--muted)}
+    @media (min-width: 900px) {
+      main {
+        display: flex;
+        flex-direction: column !important;
+        gap: 20px;
+      }
+      .card {
+        width: 100%;
+        max-width: unset;
+      }
+    }
     @media print{
       header, .footer, nav{display:none !important}
       body{background:#fff}
