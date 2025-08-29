@@ -12,12 +12,12 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Ccircle cx='60' cy='60' r='58' fill='%23000'/%3E%3Cpath d='M60 22c-17 0-30 13-30 30 0 6 2 12 5 16l-6 18 18-6a30 30 0 1 0 13-58Z' fill='%23fff'/%3E%3C/svg%3E" />
   <style>
     :root{
-      --bg: #0b0c10; /* dark background */
+      --bg: #0b0c10;
       --card: #111318;
       --text: #e6e8ef;
       --muted: #aab1c3;
-      --accent: #e11d48; /* crimson */
-      --accent-2: #f59e0b; /* amber */
+      --accent: #e11d48;
+      --accent-2: #f59e0b;
       --ring: #374151;
       --shadow: 0 10px 30px rgba(0,0,0,.25);
       --radius: 18px;
@@ -29,55 +29,41 @@
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Inter, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      margin:0; font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Inter, Arial;
       color:var(--text); background: radial-gradient(1200px 800px at 80% -10%, rgba(225,29,72,.12), transparent 60%), var(--bg);
     }
     .wrap{max-width:var(--maxw); margin-inline:auto; padding:24px;}
     header{position:sticky; top:0; background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,0)); backdrop-filter:saturate(140%) blur(6px); z-index:10}
-    .title{
-      display:flex; align-items:center; gap:16px; padding:16px 0 10px; border-bottom:1px solid var(--ring);
-    }
+    .title{display:flex; align-items:center; gap:16px; padding:16px 0 10px; border-bottom:1px solid var(--ring);}
     .logo{width:42px; height:42px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #fff 0 25%, transparent 26%), #000; box-shadow:var(--shadow)}
     h1{margin:0; font-size: clamp(22px, 3vw, 32px); letter-spacing:.2px}
     .sub{color:var(--muted); font-size:14px; margin-top:2px}
-
     nav{margin:22px 0 10px; display:flex; flex-wrap:wrap; gap:8px}
-    nav a{ text-decoration:none; color:var(--text); border:1px solid var(--ring); padding:8px 12px; border-radius:999px; font-size:14px}
+    nav a{text-decoration:none; color:var(--text); border:1px solid var(--ring); padding:8px 12px; border-radius:999px; font-size:14px}
     nav a:hover{border-color:var(--accent)}
-
-    main{display:grid; grid-template-columns: 1fr; gap:20px;}
-    @media (min-width:960px){ main{ grid-template-columns: 1.2fr .8fr; gap:26px; } }
-
+    main{display:flex; flex-direction:column; gap:20px;}
     .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0)); border:1px solid var(--ring); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden}
     .card h2{margin:0; padding:16px 18px; font-size:20px; background:linear-gradient(180deg, rgba(225,29,72,.12), transparent); border-bottom:1px solid var(--ring)}
     .card .body{padding:16px 18px}
-
     .grid{display:grid; grid-template-columns: 1fr; gap:16px}
-    @media (min-width:700px){ .grid.cols-2{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
-
     ul,ol{margin:8px 0 0 22px}
     li{margin:6px 0}
-
-    .kbd{display:inline-block; padding:2px 8px; border-radius:6px; border:1px solid var(--ring); background:var(--card); font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em}
+    .kbd{display:inline-block; padding:2px 8px; border-radius:6px; border:1px solid var(--ring); background:var(--card); font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:.9em}
     .pill{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(225,29,72,.14); border:1px solid rgba(225,29,72,.35)}
     .badge{font-size:12px; color:var(--muted)}
-
     table{border-collapse:collapse; width:100%}
     th, td{border:1px solid var(--ring); padding:10px 12px; text-align:left}
     th{background:linear-gradient(180deg, rgba(245,158,11,.18), transparent)}
-
     .footer{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin:28px 0}
     .btn{appearance:none; border:1px solid var(--ring); background:var(--card); color:var(--text); padding:10px 14px; border-radius:12px; cursor:pointer}
     .btn:hover{border-color:var(--accent)}
     .note{font-size:13px; color:var(--muted)}
-
-    /* Print-friendly */
     @media print{
       header, .footer, nav{display:none !important}
       body{background:#fff}
       .card{box-shadow:none}
       .wrap{max-width:100%; padding:0}
-      main{grid-template-columns:1fr !important}
+      main{display:block}
       a[href]::after{content:" (" attr(href) ")"}
     }
   </style>
@@ -105,24 +91,18 @@
       </nav>
     </div>
   </header>
-
   <div class="wrap">
     <main>
+      <!-- Les sections .card sont déjà sur une seule colonne -->
       <section class="card" id="tour">
         <h2>🎯 Tour de jeu</h2>
-        <div class="body grid cols-2">
-          <div>
-            <ol>
-              <li><strong>Phase Survivants</strong> (dans l'ordre de table) : chacun joue ses activations.</li>
-              <li><strong>Phase Zombies</strong> : attaques puis déplacements vers la ligne de vue ou le bruit.</li>
-              <li><strong>Phase d'Apparition</strong> : révélez 1 carte par point de spawn.</li>
-            </ol>
-            <p class="note">Le niveau de danger utilisé pour les apparitions est celui du <em>survivant le plus avancé</em>.</p>
-          </div>
-          <div>
-            <div class="pill">💡 Astuce <span class="badge">gestion du risque</span></div>
-            <p>Montez l'XP de vos héros de manière équilibrée pour éviter d'augmenter trop tôt la difficulté des cartes d'invocation.</p>
-          </div>
+        <div class="body">
+          <ol>
+            <li><strong>Phase Survivants</strong> : chacun joue ses activations.</li>
+            <li><strong>Phase Zombies</strong> : attaques puis déplacements.</li>
+            <li><strong>Phase d'Apparition</strong> : 1 carte par point de spawn.</li>
+          </ol>
+          <p class="note">Le niveau de danger est celui du survivant le plus avancé.</p>
         </div>
       </section>
 
@@ -130,13 +110,13 @@
         <h2>🧍‍♂️ Actions des survivants</h2>
         <div class="body">
           <ul>
-            <li><strong>3 actions</strong> par activation (par défaut). Certaines compétences donnent <strong>+1 action</strong>.</li>
-            <li><strong>Se déplacer</strong> : 1 zone par action.</li>
-            <li><strong>Ouvrir une porte</strong> : nécessite une arme/compétence appropriée.</li>
-            <li><strong>Attaquer</strong> : corps-à-corps ou distance, selon l'équipement.</li>
-            <li><strong>Fouiller</strong> : <em>1 fois/activation</em>, uniquement dans une pièce <strong>sans zombie</strong>.</li>
-            <li><strong>Échanger</strong> / <strong>Réorganiser</strong> l'inventaire avec un survivant dans la même zone.</li>
-            <li><strong>Équiper</strong> : 2 mains actives + 5 emplacements sac.</li>
+            <li>3 actions par activation (par défaut).</li>
+            <li>Se déplacer : 1 zone par action.</li>
+            <li>Ouvrir une porte : nécessite une arme adaptée.</li>
+            <li>Attaquer : corps-à-corps ou distance.</li>
+            <li>Fouiller : 1 fois/activation, pièce vide de zombies.</li>
+            <li>Échanger / Réorganiser l'inventaire avec un survivant dans la même zone.</li>
+            <li>Inventaire : 2 mains + 5 en sac.</li>
           </ul>
         </div>
       </section>
@@ -145,21 +125,21 @@
         <h2>⚔️ Combats</h2>
         <div class="body">
           <ul>
-            <li><strong>Jet d'attaque</strong> : lancez les dés de l'arme/sort. Chaque résultat ≥ <em>précision</em> touche.</li>
-            <li><strong>Dégâts</strong> : la valeur de dégâts de l'arme détermine quelles cibles peuvent être tuées.</li>
-            <li><strong>Priorités de cibles</strong> : Walkers → Runners → Fatties → Abomination → Nécromancien.</li>
-            <li><strong>Tirs à distance</strong> : si des survivants sont dans la zone visée, ils sont touchés <em>en priorité</em>.</li>
+            <li>Lancez les dés de l'arme/sort. Chaque résultat ≥ précision touche.</li>
+            <li>La valeur de dégâts détermine quelles cibles peuvent être tuées.</li>
+            <li>Priorités de cibles : Walkers → Runners → Fatties → Abomination → Nécromancien.</li>
+            <li>Tirs à distance : survivants touchés en priorité s'ils sont dans la zone visée.</li>
           </ul>
-          <table aria-label="Table des ennemis">
+          <table>
             <thead>
               <tr><th>Ennemi</th><th>Points de vie</th><th>Particularité</th></tr>
             </thead>
             <tbody>
               <tr><td>Walker</td><td>1</td><td>Basique</td></tr>
-              <tr><td>Runner</td><td>1</td><td>Reçoit <strong>2 actions</strong></td></tr>
-              <tr><td>Fatty</td><td>1</td><td>Nécessite une arme à <strong>2 dégâts</strong> minimum</td></tr>
-              <tr><td>Abomination</td><td>1</td><td>Élimination via <em>arme/sort spécial</em> (ex. Bile de Dragon + Torche)</td></tr>
-              <tr><td>Nécromancien</td><td>1</td><td>Tente de fuir ; s'il s'échappe, il crée un <em>nouveau point de spawn</em></td></tr>
+              <tr><td>Runner</td><td>1</td><td>2 actions</td></tr>
+              <tr><td>Fatty</td><td>1</td><td>Nécessite une arme 2 dégâts</td></tr>
+              <tr><td>Abomination</td><td>1</td><td>Tue seulement avec arme/sort spécial</td></tr>
+              <tr><td>Nécromancien</td><td>1</td><td>Fuit et ajoute un point de spawn</td></tr>
             </tbody>
           </table>
         </div>
@@ -167,17 +147,11 @@
 
       <section class="card" id="zombies">
         <h2>🧟 Zombies : activation</h2>
-        <div class="body grid cols-2">
-          <div>
-            <ol>
-              <li><strong>Attaquent</strong> s'il y a des survivants dans leur zone.</li>
-              <li>Sinon, <strong>se déplacent</strong> vers un survivant en ligne de vue, ou vers la zone <strong>la plus bruyante</strong>.</li>
-            </ol>
-          </div>
-          <div>
-            <div class="pill">🔁 Runners</div>
-            <p>Les Runners reçoivent <strong>2 actions</strong> par activation : ils peuvent <em>attaquer puis se déplacer</em>, ou se déplacer deux fois, etc.</p>
-          </div>
+        <div class="body">
+          <ol>
+            <li>Attaquent si survivants présents dans leur zone.</li>
+            <li>Sinon, se déplacent vers une cible visible ou la zone la plus bruyante.</li>
+          </ol>
         </div>
       </section>
 
@@ -185,28 +159,23 @@
         <h2>📦 Fouille & Équipement</h2>
         <div class="body">
           <ul>
-            <li>Fouille disponible <strong>1 fois par activation</strong>, seulement dans une pièce <strong>sans zombie</strong>.</li>
-            <li>Piochez 1 carte équipement : armes, armures, sorts, objets spéciaux…</li>
-            <li>Certains objets se <strong>combinaient</strong> (ex. Torche + Bile de Dragon).</li>
-            <li>Équipement porté : 2 mains actives ; sac : <strong>5 emplacements</strong>.</li>
+            <li>Fouille : 1 fois par activation, pièce vide de zombies.</li>
+            <li>Piochez 1 carte équipement.</li>
+            <li>Certains objets peuvent être combinés.</li>
+            <li>Équipement : 2 mains + 5 emplacements sac.</li>
           </ul>
         </div>
       </section>
 
       <section class="card" id="xp">
         <h2>📈 XP & Niveaux de danger</h2>
-        <div class="body grid cols-2">
-          <div>
-            <ul>
-              <li><strong>+1 XP</strong> par zombie tué ou objectif accompli.</li>
-              <li>Niveaux : <strong>Bleu</strong> (0–6) → <strong>Jaune</strong> (7–18) → <strong>Orange</strong> (19–42) → <strong>Rouge</strong> (43+).</li>
-              <li>À chaque seuil, gagnez une <strong>compétence</strong> (Jaune = +1 action).</li>
-            </ul>
-          </div>
-          <div>
-            <div class="pill">⚠️ Danger global</div>
-            <p>Les apparitions de zombies utilisent <strong>le niveau du survivant le plus haut</strong>. Équilibrez la montée d'XP !</p>
-          </div>
+        <div class="body">
+          <ul>
+            <li>+1 XP par zombie tué ou objectif accompli.</li>
+            <li>Niveaux : Bleu (0–6), Jaune (7–18), Orange (19–42), Rouge (43+).</li>
+            <li>Chaque seuil donne une compétence (Jaune = +1 action).</li>
+            <li>Apparitions basées sur le niveau le plus élevé.</li>
+          </ul>
         </div>
       </section>
 
@@ -214,10 +183,9 @@
         <h2>🧟‍➡️ Apparitions (Spawn)</h2>
         <div class="body">
           <ol>
-            <li>À chaque point d'apparition, <strong>révélez 1 carte</strong>.</li>
-            <li>Faites apparaître le <strong>nombre/type</strong> de zombies en fonction du <strong>niveau le plus élevé</strong>.</li>
+            <li>À chaque point de spawn, révélez 1 carte.</li>
+            <li>Faites apparaître le nombre/type de zombies selon le niveau le plus haut.</li>
           </ol>
-          <p class="note">Les Nécromanciens peuvent ajouter des <em>points de spawn permanents</em> s'ils s'échappent.</p>
         </div>
       </section>
 
@@ -225,26 +193,20 @@
         <h2>🔊 Bruit</h2>
         <div class="body">
           <ul>
-            <li>La plupart des actions génèrent <strong>1 jeton bruit</strong> (attaque, ouverture de porte, etc.).</li>
-            <li>Les survivants peuvent déposer un jeton <em>volontairement</em>.</li>
-            <li>Hors ligne de vue, les zombies vont vers la <strong>zone la plus bruyante</strong>.</li>
+            <li>Chaque action produit 1 jeton bruit (attaquer, ouvrir, etc.).</li>
+            <li>Un survivant peut déposer un jeton volontairement.</li>
+            <li>Sans ligne de vue, les zombies se dirigent vers la zone la plus bruyante.</li>
           </ul>
         </div>
       </section>
 
       <section class="card" id="fin">
         <h2>🏁 Fin de partie</h2>
-        <div class="body grid cols-2">
-          <div>
-            <ul>
-              <li><strong>Victoire</strong> : objectifs de mission accomplis.</li>
-              <li><strong>Défaite</strong> : si un survivant meurt, ou si la pression des Nécromanciens/Abominations échappe au contrôle.</li>
-            </ul>
-          </div>
-          <div>
-            <div class="pill">🖨️ Impression rapide</div>
-            <p>Utilisez <span class="kbd">Ctrl/Cmd + P</span> pour une version imprimable optimisée.</p>
-          </div>
+        <div class="body">
+          <ul>
+            <li>Victoire : objectifs de mission accomplis.</li>
+            <li>Défaite : si un survivant meurt ou si trop de nécromanciens/abominations échappent au contrôle.</li>
+          </ul>
         </div>
       </section>
     </main>
@@ -252,21 +214,8 @@
     <div class="footer">
       <button class="btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆️ Haut de page</button>
       <button class="btn" onclick="window.print()">🖨️ Imprimer / Exporter PDF</button>
-      <span class="note">Conçu comme aide de jeu non officielle pour usage personnel.</span>
+      <span class="note">Aide de jeu non officielle pour usage personnel.</span>
     </div>
   </div>
-
-  <script>
-    // Petite amélioration UX : garder la section active en surlignage
-    const links = Array.from(document.querySelectorAll('nav a'));
-    const sections = links.map(a => document.querySelector(a.getAttribute('href')));
-    const obs = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        const i = sections.indexOf(e.target);
-        if(i>=0){ links[i].style.borderColor = e.isIntersecting? getComputedStyle(document.documentElement).getPropertyValue('--accent') : getComputedStyle(document.documentElement).getPropertyValue('--ring'); }
-      });
-    }, { rootMargin: "-40% 0px -50% 0px", threshold: 0.01 });
-    sections.forEach(s=> s && obs.observe(s));
-  </script>
 </body>
 </html>
